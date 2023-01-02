@@ -10,7 +10,7 @@ on:
 permissions:
   pages: write
   id-token: write
-  contents: read
+  contents: write
   pull-requests: read
   
   
@@ -28,23 +28,22 @@ jobs:
         node-version: 16.13.x
         cache: npm
     
-    - name: Install
-      run: npm install
-    
-    - name: Build
-      run: npm run build
-  
+    - name: Install and build
+      run: |
+        npm install
+        npm run build
   
   deploy:
     needs: build
-      
+    
+    runs-on: ubuntu-latest
+    
     environment:
       name: github-pages
       url: "dist/index.html"
-      
-    runs-on: ubuntu-latest
-
-    steps:    
+    
+    steps:
     - name: Deploy to GitHub Pages
       id: deployment
       uses: actions/deploy-pages@v1
+      
