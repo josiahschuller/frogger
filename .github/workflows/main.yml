@@ -33,17 +33,10 @@ jobs:
         npm install
         npm run build
     
-    - name: Upload HTML artifact
+    - name: Upload artifacts
       uses: actions/upload-pages-artifact@v1
       with:
-        name: html-artifact
-        path: dist/index.html
-    
-    - name: Upload JS artifact
-      uses: actions/upload-pages-artifact@v1
-      with:
-        name: js-artifact
-        path: dist/main.js
+        path: dist
         
   
   deploy:
